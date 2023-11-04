@@ -16,7 +16,7 @@ courseRouter.post('/create',auth,async(req,res)=>{
    }
 })
 
-courseRouter.patch('/updateCourse/:courseid',async(req,res)=>{
+courseRouter.patch('/updateCourse/:courseid',auth,async(req,res)=>{
     const id=req.params.courseid
     try{
       await courseModel.findByIdAndUpdate({_id:id},req.body)
@@ -25,6 +25,21 @@ courseRouter.patch('/updateCourse/:courseid',async(req,res)=>{
     catch(err){
       res.status(400).send({"err":err})
     }
+ })
+
+ courseRouter.get('/',async(req,res)=>{
+       try{
+          const find=await courseModel.find()
+          if(find==null){
+           res.status(200).send({"msg":"No Result Found"})
+          }
+          else{
+           res.status(200).send({"courses":find})
+          } 
+       }
+       catch(err){
+           res.status(401).send({"Server Error":err}) 
+       }
  })
 
  module.exports={
