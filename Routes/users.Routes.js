@@ -119,9 +119,10 @@ userRouter.post('/removefromcart/:courseid',auth,async(req,res)=>{
     }
 })
 userRouter.patch('/updateuser/:id',async(req,res)=>{
-    const id=req.params.courseid
+    const id=req.params.id
+    console.log(req.body)
     try{
-        const finduser= await userModel.findByIdAndUpdate({_id:id},{active_orders:req.body.cart}) 
+        // const finduser= await userModel.findByIdAndUpdate({_id:id},{active_orders:req.body.cart}) 
         res.status(200).send({"msg":"Course added to active_orders Successfully from Cart"})
     }
     catch(err){
