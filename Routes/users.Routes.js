@@ -118,7 +118,16 @@ userRouter.post('/removefromcart/:courseid',auth,async(req,res)=>{
         res.status(401).send({"Server Error":err}) 
     }
 })
-
+userRouter.patch('/updateuser/:id',async(req,res)=>{
+    const id=req.params.courseid
+    try{
+        const finduser= await userModel.findByIdAndUpdate({_id:id},{active_orders:req.body.cart}) 
+        res.status(200).send({"msg":"Course added to active_orders Successfully from Cart"})
+    }
+    catch(err){
+        res.status(401).send({"Server Error":err}) 
+    }
+})
 // userRouter.get('/courses/:q',auth,async(req,res)=>{
 //     const query=req.params.q
 //     try{
