@@ -48,7 +48,7 @@ userRouter.post('/login',async(req,res)=>{
                     const token=jwt.sign({email:email},"masai")
                     //const newtoken=new tokenModel({token,email})
                    // await newtoken.save()
-                    res.status(200).send({"msg":"Login Successfull","token":token})
+                    res.status(200).send({"msg":"Login Successfull","token":token,"user":user})
                 }
                 else{
                     res.status(200).send({"msg":"Wrong credentials","err":err})
